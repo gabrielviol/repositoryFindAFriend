@@ -1,14 +1,12 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    width: 100vw;
-    height: 100vh;
     background: #F15156;
 ;
 `
 export const Content = styled.div`
     padding: 7rem;
-    border: 1px solid;
+    width: 100vw;
     height: 100vh;
 ;
 `
@@ -34,11 +32,13 @@ export const Body = styled.div`
         line-height: 65px;
         letter-spacing: -0.02em;
         text-align: left;
-
     }
     
 `
 export const Search = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 8rem 0;
 ;
 `
