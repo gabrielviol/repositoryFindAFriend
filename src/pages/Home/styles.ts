@@ -37,8 +37,23 @@ export const Body = styled.div`
 `
 export const Search = styled.div`
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
-    padding: 8rem 0;
+    padding: 8rem 0 0 0;
+    border: 1px solid;
+
+    span{
+        font-family: 'Nunito';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 34px;  
+    }
+    
+    div{
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
 ;
 `

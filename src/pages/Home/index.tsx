@@ -27,10 +27,10 @@ export function Home() {
         <img src={banner} alt="banner" />
       </Body>
       <Search>
-        <p>Encontre o animal de estimação ideal para seu estilo de vida!</p>
+        <span>Encontre o animal de estimação ideal <br/> para seu estilo de vida!</span>
         <div>
           <p>Busque um amigo: </p>
-          <Select label='tá' name='taa' options={[5 ('label', 'asd')]} />
+          <Select label='Estado' name='Estado' options={[{label: 'a', value: 1}, {label: 'b', value: 2}, {label: 'c', value: 3}]} />
         </div>
       </Search>
     </Content>
