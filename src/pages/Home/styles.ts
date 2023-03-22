@@ -12,6 +12,7 @@ export const Content = styled.div`
 `
 
 export const Header = styled.header`
+
     display: flex;
     justify-content: baseline;
     align-items: center;
