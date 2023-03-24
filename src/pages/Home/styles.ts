@@ -1,22 +1,29 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-    background: #F15156;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: ${(props) => props.theme.colors.primary};
 ;
 `
 export const Content = styled.div`
-    padding: 7rem;
-    width: 100vw;
-    height: 100vh;
-;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin: 0 auto;
+  padding: 120px 48px;
+  width: 100%;
+  max-width: calc(1216px + 96px);
+  @media (max-width: 768px) {
+    padding: 60px 24px;
+  }
 `
 
 export const Header = styled.header`
-
     display: flex;
-    justify-content: baseline;
     align-items: center;
-    gap: 0.5rem;    
+    gap: 12px;    
     span {
         font-size: 25px;
         font-weight: bolder;
