@@ -74,8 +74,8 @@ export function Home() {
           label: state.sigla,
           value: state.sigla,
         }))
-        .sort((a,b) => a.label.localeCompare(b.label))
-      setState(dataMapped)
+        .sort((a, b) => a.label.localeCompare(b.label))
+      setStates(dataMapped)
     }
     loadStates()
   }, [])
@@ -88,15 +88,29 @@ export function Home() {
           <span>FindAFriend</span>
         </Header>
         <Body>
-          <h1>Leve <br /> a felicidade <br /> para o seu lar</h1>
+          <h1>
+            Leve <br /> a felicidade <br /> para o seu lar
+          </h1>
           <img src={banner} alt="banner" />
         </Body>
         <Search>
-          <span>Encontre o animal de estimação ideal <br /> para seu estilo de vida!</span>
+          <span>
+            Encontre o animal de estimação ideal <br /> para seu estilo de vida!
+          </span>
           <div>
             <p>Busque um amigo: </p>
-            <Select label='' name='UF' options={states} onChange={handleChangeState} />
-            <Select label='' name='Cidade' options={citys} onChange={handleChangeCity} />
+            <Select
+              label=""
+              name="UF"
+              options={states}
+              onChange={handleChangeState}
+            />
+            <Select
+              label=""
+              name="Cidade"
+              options={citys}
+              onChange={handleChangeCity}
+            />
             <Button onClick={handleSearchPets} disabled={!state || !city}>
               <img src={searchIcon} alt="" />
             </Button>

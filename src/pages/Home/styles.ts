@@ -1,11 +1,10 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const Container = styled.div`
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-    background-color: ${(props) => props.theme.colors.primary};
-;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: ${(props) => props.theme.colors.primary};
 `
 export const Content = styled.div`
   display: flex;
@@ -21,47 +20,45 @@ export const Content = styled.div`
 `
 
 export const Header = styled.header`
-    display: flex;
-    align-items: center;
-    gap: 12px;    
-    span {
-        font-size: 25px;
-        font-weight: bolder;
-    }
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  span {
+    font-size: 25px;
+    font-weight: bolder;
+  }
 `
 export const Body = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    h1{
-        font-family: Nunito;
-        font-size: 72px;
-        font-weight: 800;
-        line-height: 65px;
-        letter-spacing: -0.02em;
-        text-align: left;
-    }
-    
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  h1 {
+    font-family: Nunito;
+    font-size: 72px;
+    font-weight: 800;
+    line-height: 65px;
+    letter-spacing: -0.02em;
+    text-align: left;
+  }
 `
 export const Search = styled.div`
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding: 8rem 0 0 0;
-    border: 1px solid;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 8rem 0 0 0;
+  border: 1px solid;
 
-    span{
-        font-family: 'Nunito';
-        font-style: normal;
-        font-weight: 600;
-        font-size: 24px;
-        line-height: 34px;  
-    }
-    
-    div{
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-    }
-;
+  span {
+    font-family: 'Nunito';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 34px;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
 `
