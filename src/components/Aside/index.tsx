@@ -11,6 +11,7 @@ import {
   ContentHeader,
   ContentFilters,
 } from './styles'
+import { ChangeEvent, useState } from 'react'
 
 const ageOptions = [
   {
@@ -77,13 +78,35 @@ const independencyOptions = [
   },
 ]
 
-export function Aside() {
-  function handleSearchPets() {
-    // TO DO
+type SearchFilters = {
+  age: string
+  city: string
+  energy: string
+  size: string
+  independence: string
+}
+
+interface AsideProps {
+  city: string
+  onSearchPets: (searchFilters: Partial<SearchFilters>) => Promise<void>
+}
+
+export function Aside({ city, onSearchPets }:AsideProps) {
+  const [searchFilters, setSearchFilters] = useState({
+    age: '',
+    city,
+    energy: '',
+    size: '',
+    independence: '',
+  })
+  async function handleSearchPets() {
+    await onSearchPets(searchFilters)
   }
 
-  function handleChangeSearchFilters() {
-    // TO DO
+  async function handleChangeSearchFilters(e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) {
+    const { name: field, value } = e.target
+    setSearchFilters((state) => ({ ...state, [field]: value }))
+    await onSearchPets({ ...searchFilters, [field]: value })
   }
 
   return (

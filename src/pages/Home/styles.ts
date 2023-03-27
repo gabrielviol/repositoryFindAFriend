@@ -46,7 +46,6 @@ export const Search = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   padding: 8rem 0 0 0;
-  border: 1px solid;
 
   span {
     font-family: 'Nunito';
