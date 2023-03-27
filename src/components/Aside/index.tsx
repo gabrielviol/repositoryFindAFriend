@@ -1,4 +1,7 @@
+import { ChangeEvent, useState } from 'react'
+
 import { Select } from '@/components/Select'
+import { Button } from '@/components/Button'
 
 import logo from '@/assets/icons/logo.svg'
 import search from '@/assets/icons/search.svg'
@@ -11,7 +14,7 @@ import {
   ContentHeader,
   ContentFilters,
 } from './styles'
-import { ChangeEvent, useState } from 'react'
+
 
 const ageOptions = [
   {
@@ -91,7 +94,7 @@ interface AsideProps {
   onSearchPets: (searchFilters: Partial<SearchFilters>) => Promise<void>
 }
 
-export function Aside({ city, onSearchPets }:AsideProps) {
+export function Aside({ city, onSearchPets }: AsideProps) {
   const [searchFilters, setSearchFilters] = useState({
     age: '',
     city,
@@ -115,17 +118,28 @@ export function Aside({ city, onSearchPets }:AsideProps) {
         <div>
           <img src={logo} alt="" />
           <HeaderInput>
-            <input type="text" placeholder="Insira uma cidade" />
-            <button>
+            <input 
+              name="city" 
+              type="text" 
+              placeholder="Insira uma cidade" 
+              onChange={(e) => { handleChangeSearchFilters(e) }} 
+              value={searchFilters.city} />
+            <Button onClick={handleSearchPets} disabled={!searchFilters.city}>
               <img src={search} alt="ícone de lupa" />
-            </button>
+            </Button>
           </HeaderInput>
         </div>
       </AsideHeader>
       <AsideContent>
         <ContentHeader>Filtros</ContentHeader>
         <ContentFilters>
-          <Select name="age" label="Idade" options={ageOptions} />
+          <Select 
+            name="age" 
+            label="Idade" 
+            options={ageOptions} 
+            onChange={(e) => handleChangeSearchFilters(e)} 
+            value={searchFilters.age} 
+          />
 
           <Select
             name="energy"
