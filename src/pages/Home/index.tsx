@@ -10,29 +10,6 @@ import banner from '@/assets/icons/banner.svg'
 import { Body, Container, Content, Header, Search } from './styles'
 import { api } from '@/services/http'
 
-interface ISelectOptions {
-  value: string | number
-  label: string
-}
-
-interface IState {
-  nome: string
-  sigla: string
-}
-
-interface ICity {
-  name: string
-  code: string
-}
-
-interface IResponseState {
-  states: IState[]
-}
-
-interface IResponseCity {
-  citys: ICity[]
-}
-
 export function Home() {
   const [state, setState] = useState('')
   const [city, setCity] = useState('')

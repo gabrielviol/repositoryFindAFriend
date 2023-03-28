@@ -17,44 +17,7 @@ import {
   Display,
 } from './styles'
 
-type PetTypeSearchOptions = 'all' | 'cat' | 'dog'
 
-interface IPet{
-  id: string
-  name: string
-  description: string
-  city: string
-  age: string
-  energy: number
-  size: string
-  independence: string
-  type: 'dog' | 'cat'
-  photo: string
-  orgId: string
-  photo_url: string
-}
-
-interface IPetResponse {
-  pets: IPet[]
-}
-
-type SearchFilters = {
-  age: string
-  city: string
-  energy: string
-  independence: string
-  size: string
-  type: PetTypeSearchOptions
-}
-
-const INITIAL_SEARCH_FILTERS: SearchFilters = {
-  age: '',
-  city: '',
-  energy: '',
-  independence: '',
-  size: '',
-  type: 'all',
-}
 
 function getQueryParams(search: string){
   const searchParams = new URLSearchParams(search)
