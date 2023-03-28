@@ -1,10 +1,8 @@
-import { ChangeEvent, useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 
 import chevron from '@/assets/icons/chevron-bottom-blue.svg'
-import dog from '@/assets/images/dog.png'
 
-import { api } from '@/services/http'
 import { Card } from '~/Card'
 import { Aside } from '~/Aside'
 
@@ -16,7 +14,8 @@ import {
   HeaderSelect,
   Display,
 } from './styles'
-import { SearchFilters } from '@/models/pet'
+import { PetTypeSearchOptions, SearchFilters } from '@/models/pet'
+import { useFetchPets } from '@/hooks/use-pet'
 
 const INITIAL_SEARCH_FILTERS: SearchFilters = {
   age: '',
@@ -38,28 +37,21 @@ export function Map() {
     
   const { search } = useLocation()
   const city = getQueryParams(search).city || 'Rio de Janeiro'
-  const { handle } = useSearchPets()
+  const { handleSearchFilters, searchFilters } = useSearchPets()
   const  pets = useFetchPets(searchFilters)
 
   useEffect(() => {
-    handleSearchPets(filters)
+    handleSearchPets({
+      ...INITIAL_SEARCH_FILTERS,
+      city,
+    })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   async function handleSearchPets(params: Partial<SearchFilters>) {
-    setFilters((state) => ({...state, ...params}))
-    const {city, ...queryParamsPayload} = {...filters, ...params}
-    const queryParams = new URLSearchParams({...queryParamsPayload})
-    const response = await api.get<IPetResponse>(`/pets/${city}`,{
-      params: queryParams,
-    })
-    setPets(response.data.pets)
-  }
-
-  async function handleFilterByPetType(e:ChangeEvent<HTMLSelectElement>) {
     const type = e.target.value as PetTypeSearchOptions
-    await handleSearchPets({...filters, type})
-  }
+    handleSearchFilters({ type })
+    }
 
 return (
   <Container>
@@ -71,7 +63,7 @@ return (
           Encontre <span>{pets.length} amigos</span> na sua cidade
         </p>
         <SelectWrapper>
-          <HeaderSelect name="size" id="size">
+          <HeaderSelect name="type" id="type" onChange={handleFilterByPetType} value={searchFilters.type}>
             <option value="all">Gatos e Cachorros</option>
             <option value="cats">Gatos</option>
             <option value="dogs">Cachorros</option>
@@ -80,14 +72,12 @@ return (
         </SelectWrapper>
       </Header>
       <Display>
-        <Card path={dog} type="dog" name="Alfredo" />
-        <Card path={dog} type="cat" name="Tobia" />
-        <Card path={dog} type="dog" name="Alfredo" />
-        <Card path={dog} type="cat" name="Tobia" />
-        <Card path={dog} type="dog" name="Alfredo" />
-        <Card path={dog} type="cat" name="Tobia" />
-        <Card path={dog} type="dog" name="Alfredo" />
-        <Card path={dog} type="cat" name="Tobia" />
+        {pets.map((pet) => (
+          <Link key={pet.id} to={`/pet-profile/${pet.id}`}>
+            <Card path={pet.photo_url} type={pet.type} name={pet.name} />
+          </Link>
+        ))}
+        
       </Display>
     </Content>
   </Container>
