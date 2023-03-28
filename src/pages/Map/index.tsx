@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { ChangeEvent, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 import chevron from '@/assets/icons/chevron-bottom-blue.svg'
@@ -16,6 +16,7 @@ import {
 } from './styles'
 import { PetTypeSearchOptions, SearchFilters } from '@/models/pet'
 import { useFetchPets } from '@/hooks/use-pet'
+import { useSearchPets } from '@/context/SearchPetsContext'
 
 const INITIAL_SEARCH_FILTERS: SearchFilters = {
   age: '',
@@ -41,21 +42,21 @@ export function Map() {
   const  pets = useFetchPets(searchFilters)
 
   useEffect(() => {
-    handleSearchPets({
+    handleSearchFilters({
       ...INITIAL_SEARCH_FILTERS,
       city,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  async function handleSearchPets(params: Partial<SearchFilters>) {
+  async function handleSearchPets(e: ChangeEvent<HTMLSelectElement>) {
     const type = e.target.value as PetTypeSearchOptions
     handleSearchFilters({ type })
     }
 
 return (
   <Container>
-    <Aside city={city} onSearchPets={handleSearchPets}/>
+    <Aside />
 
     <Content>
       <Header>
