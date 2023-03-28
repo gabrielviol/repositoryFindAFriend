@@ -38,11 +38,8 @@ export function Map() {
     
   const { search } = useLocation()
   const city = getQueryParams(search).city || 'Rio de Janeiro'
-  const [filters, setFilters] = useState<Partial<SearchFilters>>({
-    ...INITIAL_SEARCH_FILTERS,
-    city,
-  })
-  const [pets, setPets] = useState<IPet[]>([])
+  const { handle } = useSearchPets()
+  const  pets = useFetchPets(searchFilters)
 
   useEffect(() => {
     handleSearchPets(filters)

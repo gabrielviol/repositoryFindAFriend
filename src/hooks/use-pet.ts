@@ -1,4 +1,4 @@
-import { PetDetail, ResponsePet, ResponsePets, SearchFilters } from "@/models/pet";
+import { PetDetail, PetGallery, PetRequirement, ResponsePet, ResponsePetGallery, ResponsePetRequirements, ResponsePets, SearchFilters } from "@/models/pet";
 import { api } from "@/services/http";
 import { useCallback, useEffect, useState } from "react";
 
@@ -34,4 +34,36 @@ export function usePetsDetail(petId?: string){
     }, [petId, fetchPetDetail])
 
     return petDetail
+}
+
+export function usePetGallery(petId?: string){
+    const [ PetGallery, setPetGallery ] = useState<PetGallery[]>([])
+
+    const fetchPetGallery = useCallback(async () => {
+        if(!petId) return
+        const { data } = await api.get<ResponsePetGallery>(`/pets/gallery/${petId}`)
+        setPetGallery(data.pet_gallery)
+    }, [petId])
+
+    useEffect(() => {
+        fetchPetGallery()
+    }, [petId, fetchPetGallery])
+
+    return PetGallery
+}
+
+export function usePetRequirements(petId?: string){
+    const [ requirements, setRequirements ] = useState<PetRequirement[]>([])
+
+    const fetchPetRequirements = useCallback(async () => {
+        if(!petId) return 
+        const { data } = await api.get<ResponsePetRequirements>(`/pets/adoption-requirements/${petId}`)
+        setRequirements(data.adoption_requirements)
+    }, [petId])
+
+    useEffect(() => {
+        fetchPetRequirements()
+    }, [petId, fetchPetRequirements])
+
+    return requirements
 }
