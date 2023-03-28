@@ -16,13 +16,22 @@ import {
   HeaderSelect,
   Display,
 } from './styles'
+import { SearchFilters } from '@/models/pet'
 
+const INITIAL_SEARCH_FILTERS: SearchFilters = {
+  age: '',
+  city: '',
+  energy: '',
+  independence: '',
+  size: '',
+  type: 'all',
+}
 
 
 function getQueryParams(search: string){
   const searchParams = new URLSearchParams(search)
   const city = searchParams.get('city') || ''
-  return city
+  return { city }
 }
 
 export function Map() {
