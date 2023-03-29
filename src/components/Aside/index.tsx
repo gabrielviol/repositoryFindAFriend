@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent } from 'react'
 
 import { Select } from '@/components/Select'
 import { Button } from '@/components/Button'
@@ -14,6 +14,7 @@ import {
   ContentHeader,
   ContentFilters,
 } from './styles'
+import { useSearchPets } from '@/context/SearchPetsContext'
 
 
 const ageOptions = [
@@ -66,7 +67,7 @@ const sizeOptions = [
     value: 'big',
   },
 ]
-const independencyOptions = [
+const independenceOptions = [
   {
     label: 'Baixo',
     value: 'low',
@@ -94,22 +95,16 @@ interface AsideProps {
   onSearchPets: (searchFilters: Partial<SearchFilters>) => Promise<void>
 }
 
-export function Aside({ city, onSearchPets }: AsideProps) {
-  const [searchFilters, setSearchFilters] = useState({
-    age: '',
-    city,
-    energy: '',
-    size: '',
-    independence: '',
-  })
+export function Aside() {
+  const { handleSearchFilters, searchFilters } = useSearchPets()
+
   async function handleSearchPets() {
-    await onSearchPets(searchFilters)
+    handleSearchFilters(searchFilters)
   }
 
   async function handleChangeSearchFilters(e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) {
     const { name: field, value } = e.target
-    setSearchFilters((state) => ({ ...state, [field]: value }))
-    await onSearchPets({ ...searchFilters, [field]: value })
+    handleSearchFilters({ [field]: value })
   }
 
   return (
@@ -140,19 +135,26 @@ export function Aside({ city, onSearchPets }: AsideProps) {
             onChange={(e) => handleChangeSearchFilters(e)} 
             value={searchFilters.age} 
           />
-
-          <Select
-            name="energy"
-            label="Nível de energia"
-            options={energyOptions}
+          <Select 
+            name="energy" 
+            label="Nível de energia" 
+            options={energyOptions} 
+            onChange={(e) => handleChangeSearchFilters(e)} 
+            value={searchFilters.energy} 
           />
-
-          <Select name="size" label="Porte do animal" options={sizeOptions} />
-
-          <Select
-            name="independency"
-            label="Nível de independência"
-            options={independencyOptions}
+          <Select 
+            name="size" 
+            label="Porte do animal" 
+            options={sizeOptions} 
+            onChange={(e) => handleChangeSearchFilters(e)} 
+            value={searchFilters.size} 
+          />
+          <Select 
+            name="independence" 
+            label="Nível de independência" 
+            options={independenceOptions} 
+            onChange={(e) => handleChangeSearchFilters(e)} 
+            value={searchFilters.independence} 
           />
         </ContentFilters>
       </AsideContent>
