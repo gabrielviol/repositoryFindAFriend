@@ -20,7 +20,7 @@ export function useFetchPets(params: Partial<SearchFilters>){
     return pets
 }
 
-export function usePetsDetail(petId?: string){
+export function usePetDetail(petId?: string){
     const [ petDetail, setPetDetail ] = useState<PetDetail>({} as PetDetail)
 
     const fetchPetDetail = useCallback(async () => {

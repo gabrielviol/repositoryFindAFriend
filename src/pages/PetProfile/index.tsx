@@ -1,15 +1,48 @@
 import Leaflet from 'leaflet'
-import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState } from 'react'
+import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
+import { useParams } from 'react-router-dom'
 
-import { useCoordinates } from "@/hooks/use-location";
-import { usePetGallery, usePetRequirements, usePetsDetail } from "@/hooks/use-pet";
-
+import alertOutline from '@/assets/icons/alert-outline.svg'
+import boltDuotone from '@/assets/icons/bolt-duotone.svg'
+import boltOutline from '@/assets/icons/bolt-outline.svg'
+import circleDuotone from '@/assets/icons/circle-duotone.svg'
+import circleFill from '@/assets/icons/circle-fill.svg'
+import logoImg from '@/assets/icons/logo.svg'
 import mapMarker from '@/assets/icons/map-marker.svg'
-import { Sidebar } from "@/components/Sidebar";
+import maximize from '@/assets/icons/maximize.svg'
+import { energyRecord, sizeRecord } from '@/constant/pet-record'
+import { OPEN_STREET_MAP } from '@/constant/tile-layers'
+import { useCoordinates } from '@/hooks/use-location'
+import {
+    usePetDetail,
+    usePetGallery,
+    usePetRequirements,
+} from '@/hooks/use-pet'
+import { ButtonWhatsApp } from '~/ButtonWhatsApp'
+import { ChipPhoneNumber } from '~/ChipPhoneNumber'
+import { RateCard } from '~/RateCard'
+import { Sidebar } from '~/Sidebar'
 
-import { Container, Content, Header } from "./styles";
-import { energyRecord } from '@/constant/pet-record';
+import {
+    Banner,
+    CharacteristicsList,
+    Container,
+    Content,
+    FooterActions,
+    Header,
+    ImageList,
+    ImageListItem,
+    MapOrgContainer,
+    ProfileContainer,
+    RequirementList,
+    RequirementListItem,
+    SectionContact,
+    SectionImages,
+    SectionPet,
+    SectionRequirement,
+    SquashIcon,
+} from './styles'
 
 type PetProfileParams = {
     id: string
@@ -25,7 +58,7 @@ const MapIcon = Leaflet.icon({
 export function PetProfile() {
     const params = useParams<PetProfileParams>()
 
-    const petDetail = usePetsDetail(params.id)
+    const petDetail = usePetDetail(params.id)
     const petImage = usePetGallery(params.id)
     const requirements = usePetRequirements(params.id)
     const coordinates = useCoordinates(petDetail?.org.cep)
@@ -95,8 +128,75 @@ export function PetProfile() {
                                 rateOnSymbol={circleFill}
                             />
                         </CharacteristicsList>
-                        
-                        <SectionPet />
+
+                        <MapOrgContainer>
+                            {coordinates?.latitude && coordinates?.longitude && (
+                                <MapContainer
+                                    center={[coordinates?.latitude, coordinates.longitude]}
+                                    zoom={13}
+                                    minZoom={11}
+                                    scrollWheelZoom={true}
+                                >
+                                    <TileLayer
+                                        attribution={OPEN_STREET_MAP.attribution}
+                                        url={OPEN_STREET_MAP.url}
+                                    />
+                                    <Marker
+                                        icon={MapIcon}
+                                        position={[coordinates?.latitude, coordinates?.longitude]}
+                                    >
+                                        <Popup>
+                                            {petDetail.org?.nome} - {petDetail.org?.address}
+                                        </Popup>
+                                    </Marker>
+                                </MapContainer>
+                            )}
+                            <footer>
+                                <a
+                                    href={`https://www.google.com/maps/dir/?api=1&destination=${coordinates?.latitude},${coordinates?.longitude}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Ver rotas no Google Maps
+                                </a>
+                            </footer>
+                        </MapOrgContainer>
+                    </SectionPet>
+
+                    <SectionContact>
+                        <SquashIcon>
+                            <img src={logoImg} alt="Face cachorro" />
+                        </SquashIcon>
+                        <div>
+                            <h2>{petDetail.org?.nome}</h2>
+                            <p>{petDetail.org?.address}</p>
+                        </div>
+                        <div className="contact-info">
+                            <ChipPhoneNumber phoneNumber={petDetail.org?.whatsappNumber} />
+                        </div>
+                    </SectionContact>
+
+                    <SectionRequirement>
+                        <header>
+                            <h2>Requisitos para adoção</h2>
+                        </header>
+                        <RequirementList>
+                            {requirements.map((requirement) => (
+                                <RequirementListItem key={requirement.id}>
+                                    <img src={alertOutline} alt="" />
+                                    {requirement.title}
+                                </RequirementListItem>
+                            ))}
+                        </RequirementList>
+                    </SectionRequirement>
+
+                    <FooterActions>
+                        <ButtonWhatsApp
+                            label="Entrar em Contato"
+                            whatsappNumber={petDetail.org?.whatsappNumber}
+                        />
+                    </FooterActions>
+
                 </ProfileContainer>
             </Content>
         </Container>
