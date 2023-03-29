@@ -1,29 +1,27 @@
 export type Coordinates = {
     latitude: number
     longitude: number
-}
-
-export type SelectOptions = {
-    value: string | number
-    label: string
-}
+  }
   
-export type City = {
+  export type City = {
     name: string
     code: string
-}
-
-export type State = {
+  }
+  
+  export type SelectOptions = {
+    value: string | number
+    label: string
+  }
+  
+  export type State = {
     nome: string
     sigla: string
-}
+  }
   
-  
-export type ResponseState = {
+  export type ResponseState = {
     states: State[]
-}
+  }
   
-export type ResponseCity = {
+  export type ResponseCity = {
     citys: City[]
-
-}
+  }
