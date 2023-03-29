@@ -59,7 +59,7 @@ export function PetProfile() {
     const params = useParams<PetProfileParams>()
 
     const petDetail = usePetDetail(params.id)
-    const petImage = usePetGallery(params.id)
+    const petImages = usePetGallery(params.id)
     const requirements = usePetRequirements(params.id)
     const coordinates = useCoordinates(petDetail?.org.cep)
     const [imageSelected, setImageSelected] = useState<string>(
