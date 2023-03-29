@@ -49,7 +49,7 @@ export function Map() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  async function handleSearchPets(e: ChangeEvent<HTMLSelectElement>) {
+  async function handleFilterByPetType(e: ChangeEvent<HTMLSelectElement>) {
     const type = e.target.value as PetTypeSearchOptions
     handleSearchFilters({ type })
     }
