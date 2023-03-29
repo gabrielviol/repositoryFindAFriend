@@ -1,3 +1,5 @@
+import { RateContainer, RateLabel, RateSymbols } from "./styles"
+
 interface RateCardProps {
     label: string
     maxRate: number
