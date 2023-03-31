@@ -1,21 +1,19 @@
 import { ChangeEvent } from 'react'
 
-import { Select } from '@/components/Select'
-import { Button } from '@/components/Button'
-
 import logo from '@/assets/icons/logo.svg'
 import search from '@/assets/icons/search.svg'
+import { Button } from '~/Button'
+import { Select } from '~/Select'
 
 import {
-  Container,
-  AsideHeader,
-  HeaderInput,
   AsideContent,
-  ContentHeader,
+  AsideHeader,
+  Container,
   ContentFilters,
+  ContentHeader,
+  HeaderInput,
 } from './styles'
-import { useSearchPets } from '@/context/SearchPetsContext'
-
+import { useSearchPets } from '@/contexts/SearchPetsContext'
 
 const ageOptions = [
   {
@@ -67,6 +65,7 @@ const sizeOptions = [
     value: 'big',
   },
 ]
+
 const independenceOptions = [
   {
     label: 'Baixo',
@@ -82,19 +81,6 @@ const independenceOptions = [
   },
 ]
 
-type SearchFilters = {
-  age: string
-  city: string
-  energy: string
-  size: string
-  independence: string
-}
-
-interface AsideProps {
-  city: string
-  onSearchPets: (searchFilters: Partial<SearchFilters>) => Promise<void>
-}
-
 export function Aside() {
   const { handleSearchFilters, searchFilters } = useSearchPets()
 
@@ -102,7 +88,9 @@ export function Aside() {
     handleSearchFilters(searchFilters)
   }
 
-  async function handleChangeSearchFilters(e: ChangeEvent<HTMLSelectElement | HTMLInputElement>) {
+  function handleChangeSearchFilters(
+    e: ChangeEvent<HTMLSelectElement | HTMLInputElement>,
+  ) {
     const { name: field, value } = e.target
     handleSearchFilters({ [field]: value })
   }
@@ -113,12 +101,13 @@ export function Aside() {
         <div>
           <img src={logo} alt="" />
           <HeaderInput>
-            <input 
-              name="city" 
-              type="text" 
-              placeholder="Insira uma cidade" 
-              onChange={(e) => { handleChangeSearchFilters(e) }} 
-              value={searchFilters.city} />
+            <input
+              name="city"
+              type="text"
+              placeholder="Insira uma cidade"
+              onChange={(e) => handleChangeSearchFilters(e)}
+              value={searchFilters.city}
+            />
             <Button onClick={handleSearchPets} disabled={!searchFilters.city}>
               <img src={search} alt="ícone de lupa" />
             </Button>
@@ -128,33 +117,36 @@ export function Aside() {
       <AsideContent>
         <ContentHeader>Filtros</ContentHeader>
         <ContentFilters>
-          <Select 
-            name="age" 
-            label="Idade" 
-            options={ageOptions} 
-            onChange={(e) => handleChangeSearchFilters(e)} 
-            value={searchFilters.age} 
+          <Select
+            name="age"
+            label="Idade"
+            options={ageOptions}
+            onChange={(e) => handleChangeSearchFilters(e)}
+            value={searchFilters.age}
           />
-          <Select 
-            name="energy" 
-            label="Nível de energia" 
-            options={energyOptions} 
-            onChange={(e) => handleChangeSearchFilters(e)} 
-            value={searchFilters.energy} 
+
+          <Select
+            name="energy"
+            label="Nível de energia"
+            options={energyOptions}
+            onChange={(e) => handleChangeSearchFilters(e)}
+            value={searchFilters.energy}
           />
-          <Select 
-            name="size" 
-            label="Porte do animal" 
-            options={sizeOptions} 
-            onChange={(e) => handleChangeSearchFilters(e)} 
-            value={searchFilters.size} 
+
+          <Select
+            name="size"
+            label="Porte do animal"
+            options={sizeOptions}
+            onChange={(e) => handleChangeSearchFilters(e)}
+            value={searchFilters.size}
           />
-          <Select 
-            name="independence" 
-            label="Nível de independência" 
-            options={independenceOptions} 
-            onChange={(e) => handleChangeSearchFilters(e)} 
-            value={searchFilters.independence} 
+
+          <Select
+            name="independence"
+            label="Nível de independência"
+            options={independenceOptions}
+            onChange={(e) => handleChangeSearchFilters(e)}
+            value={searchFilters.independence}
           />
         </ContentFilters>
       </AsideContent>

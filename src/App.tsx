@@ -1,7 +1,7 @@
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 
-import { SearchPetsContextProvider } from './context/SearchPetsContext'
+import { SearchPetsContextProvider } from './contexts/SearchPetsContext'
 import { Router } from './routes'
 import GlobalStyles, { theme } from './styles/global'
 
