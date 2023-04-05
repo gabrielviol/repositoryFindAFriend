@@ -22,29 +22,31 @@ interface MapPetProps {
     containerStyle?: CSSProperties
 }
 
-export function MapPet({ coordinates, popupText, children, containerStyle = {}, }: MapPetProps){
+export function MapPet({ coordinates, popupText, children, containerStyle = {}, }: MapPetProps) {
     const shouldShowMap = coordinates?.latitude && coordinates?.longitude
-    return(
+    return (
         <>
             {shouldShowMap ? (
-                <MapOrgContainer>
-                    <MapContainer
-                        center={[coordinates?.latitude, coordinates?.longitude]}
-                        zoom={13}
-                        minZoom={11}
-                        scrollWheelZoom={false}
-                    >
-                        <TileLayer
-                            attribution={OPEN_STREET_MAP.attribution}
-                            url={OPEN_STREET_MAP.url}
-                        />
-                        <Marker icon={MapIcon} position={[coordinates?.latitude, coordinates?.longitude]}>
-                            <Popup>{popupText}</Popup>
-                        </Marker>
-                    </MapContainer>
-                </MapOrgContainer>
-                {children}
-            )   : null}
+                <>
+                    <MapOrgContainer>
+                        <MapContainer
+                            center={[coordinates?.latitude, coordinates?.longitude]}
+                            zoom={13}
+                            minZoom={11}
+                            scrollWheelZoom={false}
+                        >
+                            <TileLayer
+                                attribution={OPEN_STREET_MAP.attribution}
+                                url={OPEN_STREET_MAP.url}
+                            />
+                            <Marker icon={MapIcon} position={[coordinates?.latitude, coordinates?.longitude]}>
+                                <Popup>{popupText}</Popup>
+                            </Marker>
+                        </MapContainer>
+                    </MapOrgContainer>
+                    {children}
+                </>
+            ) : null}
         </>
     )
 }
