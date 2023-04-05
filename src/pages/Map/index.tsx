@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
 import chevron from '@/assets/icons/chevron-bottom-blue.svg'
-import { useSearchPets } from '@/contexts/SearchPetsContext' 
+import { useSearchPets } from '@/contexts/SearchPetsContext'
 import { useFetchPets } from '@/hooks/use-pet'
 import { PetTypeSearchOptions, SearchFilters } from '@/models/pet'
 import { Aside } from '~/Aside'

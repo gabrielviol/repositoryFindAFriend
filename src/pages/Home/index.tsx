@@ -1,15 +1,24 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { Select } from '@/components/Select'
-import { Button } from '@/components/Button'
-import searchIcon from '@/assets/icons/search.svg'
 import logo from '@/assets/icons/logo.svg'
-import banner from '@/assets/icons/banner.svg'
-
-import { Body, Container, Content, Header, Search } from './styles'
-import { api } from '@/services/http'
+import searchIcon from '@/assets/icons/search.svg'
+import dog from '@/assets/images/dog.png'
 import { useCitys, useStates } from '@/hooks/use-location'
+import { Button } from '~/Button'
+import { Select } from '~/Select'
+
+import {
+  AsideRight,
+  Container,
+  Content,
+  Footer,
+  Header,
+  HeaderText,
+  HeroText,
+  Text,
+  Wrapper,
+} from './styles'
 
 export function Home() {
   const [state, setState] = useState('')
@@ -28,7 +37,7 @@ export function Home() {
   }
 
   async function handleChangeState(e: any) {
-    setState(e.target.value)  
+    setState(e.target.value)
   }
 
   function handleChangeCity(e: any) {
@@ -37,41 +46,39 @@ export function Home() {
 
   return (
     <Container>
-      <Content>
+      <Wrapper>
         <Header>
-          <img src={logo} alt="Logo Find A Friend" />
-          <span>FindAFriend</span>
+          <img src={logo} alt="" />
+          <HeaderText>FindAFriend</HeaderText>
         </Header>
-        <Body>
-          <h1>
-            Leve <br /> a felicidade <br /> para o seu lar
-          </h1>
-          <img src={banner} alt="banner" />
-        </Body>
-        <Search>
-          <span>
-            Encontre o animal de estimação ideal <br /> para seu estilo de vida!
-          </span>
-          <div>
-            <p>Busque um amigo: </p>
+        <Content>
+          <HeroText>Leve a felicidade para o seu lar</HeroText>
+          <img src={dog} alt="" />
+        </Content>
+        <Footer>
+          <Text>
+            Encontre o animal de estimação ideal para seu estilo de vida!
+          </Text>
+          <AsideRight>
+            <Text size="small">Busque um amigo:</Text>
             <Select
-              label=""
               name="UF"
+              label=""
               options={states}
               onChange={handleChangeState}
-            />
+            ></Select>
             <Select
-              label=""
               name="Cidade"
+              label=""
               options={citys}
               onChange={handleChangeCity}
-            />
+            ></Select>
             <Button onClick={handleSearchPets} disabled={!state || !city}>
               <img src={searchIcon} alt="" />
             </Button>
-          </div>
-        </Search>
-      </Content>
+          </AsideRight>
+        </Footer>
+      </Wrapper>
     </Container>
   )
 }
