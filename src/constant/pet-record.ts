@@ -40,7 +40,6 @@ export const ageOptions = [
     value: 'elderly',
   },
 ]
-
 export const energyOptions = [
   {
     label: 'Muito baixa',
@@ -91,4 +90,35 @@ export const independenceOptions = [
     label: 'Alto',
     value: 'high',
   },
+]
+
+export const genderOptions = [
+  {
+    label: 'Masculino',
+    value: 'male',
+  },
+  {
+    label: 'Feminino',
+    value: 'female',
+  },
+]
+
+export const environmentsOptions = [
+  {
+    label: 'Ambiente amplo',
+    value: 'spacious',
+  },
+  {
+    label: 'Ambiente externo',
+    value: 'outdoor',
+  },
+  {
+    label: 'Ambiente interno',
+    value: 'indoor',
+  },
+]
+
+export const typeOptions = [
+  { value: 'dog', label: 'Cachorro' },
+  { value: 'cat', label: 'Gato' },
 ]
