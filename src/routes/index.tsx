@@ -5,6 +5,7 @@ import { Login } from '@/pages/Login'
 import { Map } from '@/pages/Map'
 import { PetProfile } from '@/pages/PetProfile'
 import { Register } from '@/pages/Register'
+import { PetCreate } from '@/pages/PetCreate'
 
 export function Router() {
   return (
@@ -13,6 +14,7 @@ export function Router() {
       <Route path="/map" element={<Map />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/pet-create" element={<PetCreate />} />
       <Route path="/pet-profile/:id" element={<PetProfile />} />
     </Routes>
   )

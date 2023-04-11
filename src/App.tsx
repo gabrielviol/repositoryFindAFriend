@@ -6,17 +6,22 @@ import { ThemeProvider } from 'styled-components'
 import { SearchPetsContextProvider } from './contexts/SearchPetsContext'
 import { Router } from './routes'
 import GlobalStyles, { theme } from './styles/global'
+import { AuthOrgContextProvider } from './contexts/AuthOrgContext'
+import { ToastContainer } from 'react-toastify'
 
 function App() {
   return (
-    <SearchPetsContextProvider>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <Router />
-        </BrowserRouter>
-        <GlobalStyles />
-      </ThemeProvider>
-    </SearchPetsContextProvider>
+    <AuthOrgContextProvider>
+      <SearchPetsContextProvider>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+            <Router />
+          </BrowserRouter>
+          <GlobalStyles />
+        </ThemeProvider>
+        <ToastContainer />
+      </SearchPetsContextProvider>
+    </AuthOrgContextProvider>
   )
 }
 

@@ -9,11 +9,9 @@ export const Container = styled.aside`
 export const AsideHeader = styled.div`
   height: 241px;
   background-color: #e44449;
-
   img {
     width: 45px;
   }
-
   & > div {
     padding: 81px 56px 26px;
     display: flex;
@@ -25,7 +23,6 @@ export const AsideHeader = styled.div`
 export const HeaderInput = styled.div`
   display: flex;
   gap: 12px;
-
   input {
     width: 203px;
     height: 60px;
@@ -37,28 +34,23 @@ export const HeaderInput = styled.div`
     background: transparent;
     border: 1px solid #f15156;
     outline: none;
-
     &::placeholder {
       color: #f2f2f2;
     }
   }
-
   button {
     width: 60px;
     height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
-
     background-color: #f4d35e;
     border: none;
     border-radius: 20px;
     transition: filter 0.2s;
-
     img {
       width: 22px;
     }
-
     :hover {
       filter: brightness(0.9);
     }

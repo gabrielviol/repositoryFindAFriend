@@ -14,8 +14,12 @@ import {
   HeaderInput,
 } from './styles'
 import { useSearchPets } from '@/contexts/SearchPetsContext'
-import { ageOptions, energyOptions, independenceOptions, sizeOptions } from '@/constant/pet-record'
-
+import {
+  ageOptions,
+  energyOptions,
+  independenceOptions,
+  sizeOptions,
+} from '@/constant/pet-record'
 
 export function Aside() {
   const { handleSearchFilters, searchFilters } = useSearchPets()
